@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TouchNote</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+
+</head>
+<body>
+
+	<div id=header>
+		<h1>Jiffy</h1>
+	</div>
+
+	<div id="search">
+		
+	<input type="text" placeholder="Search" id="searchtext">
+
+	<button id="btn" onclick="getData()">Search</button>
+
+	</div>
+
+	<p id="motto">Explore the world of Jiffs or Giffs or Giphs however you want to say it.</p>
+
+	<div class="inner"></div>
+
+<script>
+	
+function getData(){
+
+	var input = $("#searchtext").val()
+
+	var xhr = $.get("http://api.giphy.com/v1/gifs/search?q="+input+"+&api_key=oplROeTPe1smytzJegynmhrQxL6kgPDH&limit=3");
+    xhr.done(function(response) {
+
+    console.log("success got data", response); 
+
+//calling it response so i dont have to put data.data
+    var jiffs = response.data
+
+    for (i in jiffs)
+    {
+	$('.inner').append("<img src='"+jiffs[i].images.original.url+"' style='height:350px; width:350px;'/>")
+    }
+       });
+
+
+}
+
+</script>
+
+
+</body>
+</html>
